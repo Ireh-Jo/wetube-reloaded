@@ -7,7 +7,7 @@
     "url": "git+https://github.com/Ireh-Jo/wetube-reloaded.git"
   },
   "scripts": {
-    "win": "node index.js"
+    "dev": "nodemon --exec babel-node index.js"
   },
   "author": "Ireh Jo<kingslanding@naver.com>",
   "license": "MIT",
@@ -17,5 +17,11 @@
   "homepage": "https://github.com/Ireh-Jo/wetube-reloaded#readme",
   "dependencies": {
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
   }
 }
