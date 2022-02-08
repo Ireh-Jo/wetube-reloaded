@@ -15,7 +15,7 @@
 /videos/:id/delete -> Delete Video  
 /videos/upload -> Upload Video
 
-##MongoDB 스크립트
+## MongoDB 스크립트
 
 Version : mongod --version  
 Start : sudo service mongodb start  
