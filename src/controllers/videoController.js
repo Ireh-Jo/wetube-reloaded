@@ -3,9 +3,6 @@ import Video from "../models/Video";
 /*
 //callback 방식
 Video.find({}, (error, videos) => {
-  if(error) {
-    return res.render("server-error");
-  }
   return res.render("home", { pageTitle: "Home", videos });
 });
 */
