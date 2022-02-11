@@ -10,6 +10,7 @@ Video.find({}, (error, videos) => {
 export const home = async (req, res) => {
   //promise 방식
   const videos = await Video.find({});
+  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos });
 };
 export const watch = (req, res) => {
@@ -29,7 +30,18 @@ export const postEdit = (req, res) => {
 export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
-export const postUpload = (req, res) => {
-  const { title } = req.body;
+export const postUpload = async (req, res) => {
+  const { title, description, hashtags } = req.body;
+  await Video.create({
+    title,
+    description,
+    createdAt: Date.now(),
+    hashtags: hashtags.split(",").map((word) => `#${word}`),
+    meta: {
+      views: 0,
+      rating: 0,
+    },
+  });
+
   return res.redirect("/");
 };
