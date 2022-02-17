@@ -9,7 +9,7 @@ Video.find({}, (error, videos) => {
 
 export const home = async (req, res) => {
   //promise 방식
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -69,3 +69,11 @@ export const deleteVideo = async (req, res) => {
   await Video.findByIdAndDelete(id);
   return res.redirect("/");
 };
+
+export const search = (req, res) => {
+  const { keyword } = req.query;
+  if (keyword) {
+    // search
+  }
+  return res.render("search", { pageTitle: "Search" });
+}
