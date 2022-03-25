@@ -37,7 +37,8 @@ export const postLogin = async (req, res) => {
   if (!ok) {
     return res.status(400).render("login", { pageTitle, errorMessage: "Wrong password." });
   }
-  console.log("LOG USER IN! COMING SOON!");
+  req.session.loggedIn = true;
+  req.session.user = user;
   res.redirect("/");
 };
 export const edit = (req, res) => res.send("Edit User");
