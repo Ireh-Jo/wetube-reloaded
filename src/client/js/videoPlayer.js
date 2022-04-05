@@ -71,10 +71,8 @@ const handleFullscreen = () => {
   const fullscreen = document.fullscreenElement;
   if (fullscreen) {
     document.exitFullscreen();
-    fullScreenIcon.classList = "fas fa-expand";
   } else {
     videoContainer.requestFullscreen();
-    fullScreenIcon.classList = "fas fa-compress";
   }
 };
 
@@ -113,7 +111,23 @@ const handleVideoClick = () => {
 const handleWindowKeydown = (event) => {
   if (event.keyCode === 32) {
     toggleVideoPlay();
+  } else if (event.keyCode === 70) {
+    videoContainer.requestFullscreen();
   }
+};
+
+const handleFullscreenChange = (event) => {
+  const fullscreen = document.fullscreenElement;
+  if (fullscreen) {
+    fullScreenIcon.classList = "fas fa-compress";
+  } else {
+    fullScreenIcon.classList = "fas fa-expand";
+  }
+};
+
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, { method: "POST" });
 };
 
 playBtn.addEventListener("click", handlePlayClick);
@@ -122,8 +136,10 @@ volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadedmetadata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
 video.addEventListener("click", handleVideoClick);
+video.addEventListener("ended", handleEnded);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 window.addEventListener("keydown", handleWindowKeydown);
+window.addEventListener("fullscreenchange", handleFullscreenChange);
