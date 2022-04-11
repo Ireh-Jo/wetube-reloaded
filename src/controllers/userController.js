@@ -89,6 +89,7 @@ export const finishGithubLogin = async (req, res) => {
     ).json();
     const emailObj = emailData.find((email) => email.primary === true && email.verified === true);
     if (!emailObj) {
+      req.flash("error", "No email information");
       return res.redirect("/login");
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -111,7 +112,9 @@ export const finishGithubLogin = async (req, res) => {
   }
 };
 export const logout = (req, res) => {
-  req.session.destroy();
+  req.session.user = null;
+  req.session.loggedIn = false;
+  req.flash("info", "Bye Bye");
   return res.redirect("/");
 };
 export const getEdit = (req, res) => {
@@ -154,6 +157,7 @@ export const postEdit = async (req, res) => {
 };
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password");
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageTitle: "Change Password" });
@@ -175,6 +179,7 @@ export const postChangePassword = async (req, res) => {
   }
   user.password = newPassword;
   await user.save();
+  req.flash("info", "Password updated");
   return res.redirect("/users/logout");
 };
 export const see = async (req, res) => {
