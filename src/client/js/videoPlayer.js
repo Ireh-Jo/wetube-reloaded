@@ -109,10 +109,12 @@ const handleVideoClick = () => {
 };
 
 const handleWindowKeydown = (event) => {
-  if (event.keyCode === 32) {
-    toggleVideoPlay();
-  } else if (event.keyCode === 70) {
-    videoContainer.requestFullscreen();
+  if (event.target.tagName.toUpperCase() !== "TEXTAREA") {
+    if (event.keyCode === 32) {
+      toggleVideoPlay();
+    } else if (event.keyCode === 70) {
+      videoContainer.requestFullscreen();
+    }
   }
 };
 
