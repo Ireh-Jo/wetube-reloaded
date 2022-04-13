@@ -1,5 +1,6 @@
 import User from "../models/User";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 /*
 //callback 방식
@@ -124,8 +125,20 @@ export const registerView = async (req, res) => {
   return res.sendStatus(200);
 };
 
-export const createComment = (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
-  return res.end();
+export const createComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { text },
+    session: { user },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  return res.sendStatus(201);
 };
