@@ -13,6 +13,7 @@ const addComment = (text, id) => {
   span.innerText = ` ${text}`;
   const removeBtn = document.createElement("span");
   removeBtn.innerText = "❌";
+  removeBtn.className = "video__comment-removeBtn";
   removeBtn.addEventListener("click", handleClickRemoveBtn);
   newComment.appendChild(icon);
   newComment.appendChild(span);
