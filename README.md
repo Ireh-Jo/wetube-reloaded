@@ -22,3 +22,7 @@ Start : sudo service mongodb start
 Stop : sudo service mongodb stop  
 Status : sudo service mongodb status ( 실행중이면 [OK] 아니면 [Fail] )  
 Mongo Shell : mongo
+
+## 완성된 홈페이지 링크
+
+https://wetube-ireh.herokuapp.com/
