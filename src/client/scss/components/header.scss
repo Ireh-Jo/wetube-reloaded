@@ -6,6 +6,11 @@ header {
   .header__logo {
     color: $red;
     font-size: 38px;
+    span {
+      color: #374151;
+      font-weight: 600;
+      letter-spacing: -3px;
+    }
   }
   ul {
     display: flex;

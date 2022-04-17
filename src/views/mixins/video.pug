@@ -3,7 +3,16 @@ mixin video(video)
         div.video-mixin__thumb
             img(src=video.thumbUrl, crossorigin)
         div.video-mixin__data
-            span.video-mixin__title=video.title
-            div.video-mixin__meta
-                span #{video.owner.name} • 
-                span #{video.meta.views} 회
+            div.video-mixin__avatar
+                if video.owner.avatarUrl === ""
+                    span 😀
+                else
+                    if video.owner.socialOnly
+                        img(src=video.owner.avatarUrl, crossorigin)
+                    else 
+                        img(src="/" + video.owner.avatarUrl, crossorigin)
+            div.video-mixin__info
+                span.video-mixin__title=video.title
+                div.video-mixin__meta
+                    span #{video.owner.name} • 
+                    span #{video.meta.views} 회
